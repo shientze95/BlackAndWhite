@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdbool.h>
+#include<stdlib.h>
 #include<conio.h>
 
 void display(char box[8][8])
@@ -17,6 +18,12 @@ void display(char box[8][8])
 		
 			printf("|\n");
 		}
+	printf("\n 'w' to go up\n");
+	printf("\n 'a' to go left\n");
+	printf("\n 's' to go down\n");
+	printf("\n 'd' to go right\n");
+	printf("\n 'Space' to confirm");
+	printf("\n 'Q' to quit");
 	}while (b<8);
 }
 
@@ -26,6 +33,83 @@ struct player
 	char token;
 	int score;
 };
+int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
+{	
+	int count=0;
+	int x1,y1;
+	int x2,y2;
+	
+	for(y1=hurairah;y1<8;y1++)
+		{	
+			if(box[x][y1] == ' ')
+			
+			break;
+			
+			else if(box[x][y1] == playertoken)
+				
+				for(y2=hurairah;y2<y1;y2++)
+				{
+					box[x][y2]=playertoken;
+					count++;
+				}
+				
+				if(count>0)
+				break;
+				
+		}
+	for(y1=hurairah;y1>=0;y1--)
+		{
+			if(box[x][y1] == ' ')
+			
+			break;
+			
+			else if(box[x][y1] == playertoken)
+			
+				for(y2=hurairah;y2>y1;y2--)
+				{
+					box[x][y2]=playertoken;
+					count++;
+					
+				}
+				if(count>0)
+				break;
+		}
+	for(x1=x;x1<8;x1++)
+		{
+			if(box[x1][hurairah] == ' ')
+			
+			break;
+			
+			else if(box[x1][hurairah] == playertoken)
+				
+				for(x2=x;x2<x1;x2++);
+				{
+					box[x2][hurairah]=playertoken;
+					count++;
+				
+				}
+				if(count>0)
+				break;
+		}
+	
+	for(x1=x;x1>=0;x1--)
+		{
+			if(box[x1][hurairah] == ' ')
+			
+			break;
+			
+			else if (box[x1][hurairah] = playertoken)
+				for(x2=x;x2>x1;x2--);
+				{
+					box[x2][hurairah]=playertoken;
+					count++;
+				
+				}
+				if (count>0)
+				break;
+		}
+	return count;
+}
 	
 struct player game()
 {	
@@ -36,11 +120,15 @@ struct player game()
 	int a,b,c;
 	char box[8][8];
 	int invisibleplayer=2;
+	int allx=0;
+	int allhurairah=0;
+	int counter=0;
 	bool loop = true, confirm=false;
 	struct player player1;
 	struct player player2;
 	struct player playerinvisible;
-	int allx,allhurairah;
+	printf("@o@o@o@o@o@o@o Welcome to The Game Black and White @o@o@o@o@o@o@o\n");
+	printf("\nPlease enter your details\n");
 	player1.token='@';
 	printf("What is player 1 name?");
 	scanf(" %s",&player1.name);
@@ -69,70 +157,72 @@ struct player game()
 			playerinvisible=player2;
 			invisibleplayer=2;
 		}
-		
 		display(box);
 		confirm=false;
 		while(!confirm)
 		{
-			printf("\n %s\n",playerinvisible.name);
+			system("cls");
 			bob=box[x][hurairah];
 			box[x][hurairah]= 'X';
-			allx=x;
-			allhurairah=hurairah;
+			printf("\nIts %s turn\n",playerinvisible.name);
 			display(box);
 			userinput=getch();
-			if (userinput== 'w')
-			{
-				if(x>0)
-				
-					x--;
-				
-			}
-			else if(userinput=='a')
-			{
-				if(hurairah>0)
-				
-					hurairah--;
-				
-			}
-			else if(userinput=='s')
-			{
-				if(x<7)
-				
-					x++;
-				
-			}
-			else if(userinput=='d')
-			{
-				if(hurairah<7)
-				
-					hurairah++;
-				
-			}
-			else if(userinput == 'x')
-			{
-				printf("Holy-moly");
-				if(box[x][hurairah]== ' ')
-				{	
-					box[x][hurairah]= '&';
-					confirm=true;
-				}
-			}	
-			else 
 			
-			{	
-				printf("InVAliD Inpuy\n");
+			if(userinput == ' ')
+			{
+				if(bob!='@' && bob!='o')
+				{	
+					box[x][hurairah]= playerinvisible.token;
+					confirm=true;
+					
+				}
+				else 
+					box[x][hurairah]=bob;
+					
 			}
-			box[allx][allhurairah]=bob;
+			else
+			{
+				allx=x;
+				allhurairah=hurairah;
+				if (userinput== 'w')
+				{
+					if(x>0)
+				
+						x--;
+				
+				}
+				else if(userinput=='a')
+				{
+					if(hurairah>0)
+				
+						hurairah--;
+				
+				}
+				else if(userinput=='s')
+				{
+					if(x<7)
+				
+						x++;
+				
+				}
+				else if(userinput=='d')
+				{
+					if(hurairah<7)
+				
+						hurairah++;
+				}
+				
+				box[allx][allhurairah]=bob;
+			}
+		}	 
 	}
 	return player1;
-	}
 }
+
+
 int main()
 {	
 	struct player winningplayer;
 	winningplayer=game();
-	printf("%s",winningplayer.name);
-	return 0;
 }
 
