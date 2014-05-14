@@ -51,8 +51,12 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 {	
 	int count=0;
 	int innercount=0;
-	int x1,y1;
-	int x2,y2;
+	int x1=0;
+	int y1=0;
+	int x2=0;
+	int y2=0;
+	int diagonalloop;
+	int movingdiagonall=1;
 	
 	for(y1=hurairah;y1<8;y1++)
 		{	
@@ -104,7 +108,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			
 			else if(box[x1][hurairah] == playertoken)
 			{	
-				for(x2=x;x2<x1;x2++);
+				for(x2=x;x2<x1;x2++)
 				{
 					box[x2][hurairah]=playertoken;
 					innercount++;
@@ -126,7 +130,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			
 			else if (box[x1][hurairah] == playertoken)
 			{
-				for(x2=x;x2>x1;x2--);
+				for(x2=x;x2>x1;x2--)
 				{
 					box[x2][hurairah]=playertoken;
 					innercount++;
@@ -139,7 +143,43 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 				}
 			}
 		}
-	return count;
+	innercount=0;
+	do
+	{
+		if((x1+ movingdiagonall)<8)
+			x1=x+movingdiagonall;
+		else 
+			break;
+		if((y1+ movingdiagonall)<8)
+			y1=hurairah+movingdiagonall;
+		else
+			break;
+		if(box[x1][y1]=' ')
+			break;
+		else if (box[x1][y1]==playertoken)
+		{
+			for(diagonalloop=0;diagonalloop<movingdiagonall;diagonalloop++)
+			{
+				box[x+diagonalloop][hurairah+diagonalloop]=playertoken;
+				innercount++;
+				count++;
+			}
+			if(innercount>0)
+				{	
+					count--;
+					break;
+				}
+	
+		}
+		else 
+		{
+			movingdiagonall++;
+		}
+			
+	}while(1==1);
+
+return count;
+
 }
 	
 struct player game()
@@ -254,6 +294,7 @@ struct player game()
 		}
 	 
 	}
+
 	return player1;
 }
 
