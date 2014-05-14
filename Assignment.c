@@ -146,19 +146,19 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 	innercount=0;
 	do
 	{
-		if((x1+ movingdiagonall)<8)
+		if ((x1+ movingdiagonall)<8)
 			x1=x+movingdiagonall;
 		else 
 			break;
-		if((y1+ movingdiagonall)<8)
+		if ((y1+ movingdiagonall)<8)
 			y1=hurairah+movingdiagonall;
 		else
 			break;
-		if(box[x1][y1]=' ')
+		if (box[x1][y1]==' ')
 			break;
 		else if (box[x1][y1]==playertoken)
 		{
-			for(diagonalloop=0;diagonalloop<movingdiagonall;diagonalloop++)
+			for (diagonalloop=0; diagonalloop < movingdiagonall; diagonalloop++)
 			{
 				box[x+diagonalloop][hurairah+diagonalloop]=playertoken;
 				innercount++;
@@ -175,9 +175,9 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			movingdiagonall++;
 		}
 			
-	}while(1==1);
+	}while (1 == 1);
 
-return count;
+	return count;
 
 }
 	
