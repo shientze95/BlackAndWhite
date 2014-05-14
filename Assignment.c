@@ -143,6 +143,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 				}
 			}
 		}
+	/*Downright*/
 	innercount=0;
 	do
 	{
@@ -176,8 +177,110 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 		}
 			
 	}while (1 == 1);
-
+/*Downleft*/
+innercount=0;
+	do
+	{
+		if ((x1+ movingdiagonall)<8)
+			x1=x+movingdiagonall;
+		else 
+			break;
+		if ((y1- movingdiagonall)<8)
+			y1=hurairah-movingdiagonall;
+		else
+			break;
+		if (box[x1][y1]==' ')
+			break;
+		else if (box[x1][y1]==playertoken)
+		{
+			for (diagonalloop=0; diagonalloop < movingdiagonall; diagonalloop++)
+			{
+				box[x+diagonalloop][hurairah-diagonalloop]=playertoken;
+				innercount++;
+				count++;
+			}
+			if(innercount>0)
+			{	
+				count--;
+				break;
+			}
+		}
+		else 
+		{
+			movingdiagonall++;
+		}
+			
+	}while (1 == 1);
+/*up right*/
+innercount=0;
+	do
+	{
+		if ((x1- movingdiagonall)<8)
+			x1=x-movingdiagonall;
+		else 
+			break;
+		if ((y1+ movingdiagonall)<8)
+			y1=hurairah+movingdiagonall;
+		else
+			break;
+		if (box[x1][y1]==' ')
+			break;
+		else if (box[x1][y1]==playertoken)
+		{
+			for (diagonalloop=0; diagonalloop < movingdiagonall; diagonalloop++)
+			{
+				box[x-diagonalloop][hurairah+diagonalloop]=playertoken;
+				innercount++;
+				count++;
+			}
+			if(innercount>0)
+			{	
+				count--;
+				break;
+			}
+		}
+		else 
+		{
+			movingdiagonall++;
+		}
+			
+	}while (1 == 1);
+/*up left*/
+innercount=0;
+	do
+	{
+		if ((x1- movingdiagonall)<8)
+			x1=x-movingdiagonall;
+		else 
+			break;
+		if ((y1- movingdiagonall)<8)
+			y1=hurairah-movingdiagonall;
+		else
+			break;
+		if (box[x1][y1]==' ')
+			break;
+		else if (box[x1][y1]==playertoken)
+		{
+			for (diagonalloop=0; diagonalloop < movingdiagonall; diagonalloop++)
+			{
+				box[x-diagonalloop][hurairah-diagonalloop]=playertoken;
+				innercount++;
+				count++;
+			}
+			if(innercount>0)
+			{	
+				count--;
+				break;
+			}
+		}
+		else 
+		{
+			movingdiagonall++;
+		}
+			
+	}while (1 == 1);
 	return count;
+
 
 }
 	
@@ -249,7 +352,13 @@ struct player game()
 				{	
 					box[x][hurairah]= playerinvisible.token;
 					counter=fliptokens(box,playerinvisible.token,x,hurairah);
-					confirm=true;
+					if (counter<1)
+					{
+						box[x][hurairah]=' ';
+					}
+					else 
+						confirm=true;
+					
 					
 				}
 				else 
