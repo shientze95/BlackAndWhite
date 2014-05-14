@@ -165,11 +165,10 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 				count++;
 			}
 			if(innercount>0)
-				{	
-					count--;
-					break;
-				}
-	
+			{	
+				count--;
+				break;
+			}
 		}
 		else 
 		{
