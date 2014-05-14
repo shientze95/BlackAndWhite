@@ -8,16 +8,16 @@ void display(char box[8][8])
 	int a=0;
 	int b=0;		
 	do
-	{
-		for(a=0;a<8;a++)
+	{	for(a=0;a<8;a++)
 		{
 			for(b=0;b<8;b++)
 			{
 				printf("| %c",box[a][b]);
 			}
-		
-			printf("|\n");
+
+			printf("|\n");	
 		}
+	
 	printf("\n 'w' to go up\n");
 	printf("\n 'a' to go left\n");
 	printf("\n 's' to go down\n");
@@ -61,7 +61,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			break;
 			
 			else if(box[x][y1] == playertoken)
-				
+			{	
 				for(y2=hurairah;y2<y1;y2++)
 				{
 					box[x][y2]=playertoken;
@@ -73,27 +73,29 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 					count--;
 					break;
 				}
+			}
 		}
+	innercount=0;
 	for(y1=hurairah;y1>=0;y1--)
-		{
-			if(box[x][y1] == ' ')
-			
+	{
+		if(box[x][y1] == ' ')
 			break;
-			
-			else if(box[x][y1] == playertoken)
-			
-				for(y2=hurairah;y2>y1;y2--)
-				{
-					box[x][y2]=playertoken;
-					innercount++;
+		else if(box[x][y1] == playertoken)
+		{
+			for(y2=hurairah;y2>y1;y2--)
+			{
+				box[x][y2]=playertoken;
+				innercount++;
 					
-				}
+			}
 				if(innercount>0)
 				{
 					count--;
 					break;
 				}
-		}		
+		}
+	}
+	innercount=0;		
 	for(x1=x;x1<8;x1++)
 		{
 			if(box[x1][hurairah] == ' ')
@@ -101,7 +103,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			break;
 			
 			else if(box[x1][hurairah] == playertoken)
-				
+			{	
 				for(x2=x;x2<x1;x2++);
 				{
 					box[x2][hurairah]=playertoken;
@@ -113,15 +115,17 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 					count--;
 					break;
 				}
+			}
 		}
-	
-	for(x1=x;x1>=0;x1--)
+	innercount=0;
+	for(x1=x;x1>0;x1--)
 		{
 			if(box[x1][hurairah] == ' ')
 			
 			break;
 			
-			else if (box[x1][hurairah] = playertoken)
+			else if (box[x1][hurairah] == playertoken)
+			{
 				for(x2=x;x2>x1;x2--);
 				{
 					box[x2][hurairah]=playertoken;
@@ -133,6 +137,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 					count--;
 					break;
 				}
+			}
 		}
 	return count;
 }
@@ -189,13 +194,13 @@ struct player game()
 		while(!confirm)
 		{
 			system("cls");
+			player1.score=counttokens(box,player1.token);
+			player2.score=counttokens(box,player2.token);
 			bob=box[x][hurairah];
 			box[x][hurairah]= 'X';
 			printf("\nIts %s turn\n",playerinvisible.name);
-			player1.score=counttokens(box,player1.token);
-			player2.score=counttokens(box,player2.token);
 			printf("\n%s Tokens: %i\n",player1.name,player1.score);
-			printf("\n%s Tokens: %i\n",player1.name,player2.score);
+			printf("\n%s Tokens: %i\n",player2.name,player2.score);
 			display(box);
 			userinput=getch();
 			
@@ -204,6 +209,7 @@ struct player game()
 				if(bob!='@' && bob!='o')
 				{	
 					box[x][hurairah]= playerinvisible.token;
+					counter=fliptokens(box,playerinvisible.token,x,hurairah);
 					confirm=true;
 					
 				}
@@ -245,7 +251,8 @@ struct player game()
 					
 				box[allx][allhurairah]=bob;
 			}
-		}	 
+		}
+	 
 	}
 	return player1;
 }
