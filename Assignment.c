@@ -184,7 +184,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 		}
 					
 	}while (1 == 1);
-/*Downleft*/
+	/*Downleft*/
 	x1=0;
 	y1=0;
 	movingdiagonall=1;
