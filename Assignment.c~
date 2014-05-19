@@ -70,6 +70,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 				{
 					box[x][y2]=playertoken;
 					innercount++;
+					count++;
 				}
 				
 				if(innercount>0)
@@ -79,6 +80,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 				}
 			}
 		}
+	
 	innercount=0;
 	for(y1=hurairah;y1>=0;y1--)
 	{
@@ -90,6 +92,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			{
 				box[x][y2]=playertoken;
 				innercount++;
+				count++;
 					
 			}
 				if(innercount>0)
@@ -112,7 +115,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 				{
 					box[x2][hurairah]=playertoken;
 					innercount++;
-				
+					count++;
 				}
 				if(innercount>0)
 				{	
@@ -134,6 +137,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 				{
 					box[x2][hurairah]=playertoken;
 					innercount++;
+					count++;
 				
 				}
 				if (innercount>0)
@@ -144,6 +148,9 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			}
 		}
 	/*Downright*/
+	x1=0;
+	y1=0;
+	movingdiagonall=1;
 	innercount=0;
 	do
 	{
@@ -175,10 +182,13 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 		{
 			movingdiagonall++;
 		}
-			
+					
 	}while (1 == 1);
 /*Downleft*/
-innercount=0;
+	x1=0;
+	y1=0;
+	movingdiagonall=1;
+	innercount=0;
 	do
 	{
 		if ((x1+ movingdiagonall)<8)
@@ -204,7 +214,8 @@ innercount=0;
 				count--;
 				break;
 			}
-		}
+		
+			}
 		else 
 		{
 			movingdiagonall++;
@@ -212,7 +223,10 @@ innercount=0;
 			
 	}while (1 == 1);
 /*up right*/
-innercount=0;
+	x1=0;
+	y1=0;
+	movingdiagonall=1;
+	innercount=0;
 	do
 	{
 		if ((x1- movingdiagonall)<8)
@@ -238,7 +252,8 @@ innercount=0;
 				count--;
 				break;
 			}
-		}
+		
+			}
 		else 
 		{
 			movingdiagonall++;
@@ -246,7 +261,10 @@ innercount=0;
 			
 	}while (1 == 1);
 /*up left*/
-innercount=0;
+	x1=0;
+	y1=0;
+	movingdiagonall=1;
+	innercount=0;
 	do
 	{
 		if ((x1- movingdiagonall)<8)
@@ -272,7 +290,8 @@ innercount=0;
 				count--;
 				break;
 			}
-		}
+		
+			}
 		else 
 		{
 			movingdiagonall++;
@@ -356,9 +375,8 @@ struct player game()
 					{
 						box[x][hurairah]=' ';
 					}
-					else 
+					else 							
 						confirm=true;
-					
 					
 				}
 				else 
