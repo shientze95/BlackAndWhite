@@ -154,11 +154,11 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 	innercount=0;
 	do
 	{
-		if ((x1+ movingdiagonall)<8)
+		if ((x+ movingdiagonall)<8)
 			x1=x+movingdiagonall;
 		else 
 			break;
-		if ((y1+ movingdiagonall)<8)
+		if ((hurairah+ movingdiagonall)<8)
 			y1=hurairah+movingdiagonall;
 		else
 			break;
@@ -191,11 +191,11 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 	innercount=0;
 	do
 	{
-		if ((x1+ movingdiagonall)<8)
+		if ((x+ movingdiagonall)<8)
 			x1=x+movingdiagonall;
 		else 
 			break;
-		if ((y1- movingdiagonall)<8)
+		if ((hurairah- movingdiagonall)<8)
 			y1=hurairah-movingdiagonall;
 		else
 			break;
@@ -229,11 +229,11 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 	innercount=0;
 	do
 	{
-		if ((x1- movingdiagonall)<8)
+		if ((x - movingdiagonall)<8)
 			x1=x-movingdiagonall;
 		else 
 			break;
-		if ((y1+ movingdiagonall)<8)
+		if ((hurairah + movingdiagonall)<8)
 			y1=hurairah+movingdiagonall;
 		else
 			break;
@@ -267,11 +267,11 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 	innercount=0;
 	do
 	{
-		if ((x1- movingdiagonall)<8)
+		if ((x- movingdiagonall)<8)
 			x1=x-movingdiagonall;
 		else 
 			break;
-		if ((y1- movingdiagonall)<8)
+		if ((hurairah- movingdiagonall)<8)
 			y1=hurairah-movingdiagonall;
 		else
 			break;
