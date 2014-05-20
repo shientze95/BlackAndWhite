@@ -229,11 +229,11 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 	innercount=0;
 	do
 	{
-		if ((x - movingdiagonall)<8)
+		if (x - movingdiagonall<8)
 			x1=x-movingdiagonall;
 		else 
 			break;
-		if ((hurairah + movingdiagonall)<8)
+		if (hurairah + movingdiagonall<8)
 			y1=hurairah+movingdiagonall;
 		else
 			break;
@@ -253,13 +253,13 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 				break;
 			}
 		
-			}
+		}
 		else 
 		{
 			movingdiagonall++;
 		}
 			
-	}while (1 == 1);
+	}while (movingdiagonall>1);
 /*up left*/
 	x1=0;
 	y1=0;
@@ -272,7 +272,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 		else 
 			break;
 		if ((hurairah- movingdiagonall)<8)
-			y1=hurairah-movingdiagonall;
+			y1=(hurairah-movingdiagonall);
 		else
 			break;
 		if (box[x1][y1]==' ')
@@ -297,7 +297,8 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			movingdiagonall++;
 		}
 			
-	}while (1 == 1);
+	}while (movingdiagonall>1);
+
 	return count;
 
 
@@ -365,7 +366,7 @@ struct player game()
 			display(box);
 			userinput=getch();
 			
-			if(userinput == ' ')
+			if(userinput == 'x')
 			{
 				if(bob!='@' && bob!='o')
 				{	
@@ -374,6 +375,7 @@ struct player game()
 					if (counter<1)
 					{
 						box[x][hurairah]=' ';
+						printf("/nInvalid move");
 					}
 					else 							
 						confirm=true;
@@ -418,7 +420,7 @@ struct player game()
 				box[allx][allhurairah]=bob;
 			}
 		}
-	 
+		
 	}
 
 	return player1;
