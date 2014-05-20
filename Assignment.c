@@ -18,12 +18,13 @@ void display(char box[8][8])
 			printf("|\n");	
 		}
 	
-	printf("\n 'w' to go up\n");
-	printf("\n 'a' to go left\n");
-	printf("\n 's' to go down\n");
-	printf("\n 'd' to go right\n");
+	printf("\n 'w' to go up");
+	printf("\n 'a' to go left");
+	printf("\n 's' to go down");
+	printf("\n 'd' to go right");
 	printf("\n 'Space' to confirm");
-	printf("\n 'Q' to quit");
+	printf("\n 'y' to skip turns");
+	printf("\n 'q' to quit");
 	}while (b<8);
 }
 
@@ -55,9 +56,9 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 	int y1=0;
 	int x2=0;
 	int y2=0;
-	int diagonalloop;
+	int diagonalloop = 0;
 	int movingdiagonall=1;
-	
+	/*right*/
 	for(y1=hurairah;y1<8;y1++)
 		{	
 			if(box[x][y1] == ' ')
@@ -80,7 +81,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 				}
 			}
 		}
-	
+	/*Left*/
 	innercount=0;
 	for(y1=hurairah;y1>=0;y1--)
 	{
@@ -102,6 +103,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 				}
 		}
 	}
+/*Down*/
 	innercount=0;		
 	for(x1=x;x1<8;x1++)
 		{
@@ -124,13 +126,12 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 				}
 			}
 		}
+/*Up*/
 	innercount=0;
 	for(x1=x;x1>0;x1--)
 		{
 			if(box[x1][hurairah] == ' ')
-			
-			break;
-			
+				break;
 			else if (box[x1][hurairah] == playertoken)
 			{
 				for(x2=x;x2>x1;x2--)
@@ -147,9 +148,9 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 				}
 			}
 		}
-	/*Downright*/
-	x1=0;
-	y1=0;
+/*Down right*/
+	x1=x;
+	y1=hurairah;
 	movingdiagonall=1;
 	innercount=0;
 	do
@@ -184,9 +185,9 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 		}
 					
 	}while (1 == 1);
-	/*Downleft*/
-	x1=0;
-	y1=0;
+/*Downleft*/
+	x1=x;
+	y1=hurairah;
 	movingdiagonall=1;
 	innercount=0;
 	do
@@ -195,7 +196,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			x1=x+movingdiagonall;
 		else 
 			break;
-		if ((hurairah- movingdiagonall)<8)
+		if ((hurairah- movingdiagonall)>=0)
 			y1=hurairah-movingdiagonall;
 		else
 			break;
@@ -223,17 +224,17 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			
 	}while (1 == 1);
 /*up right*/
-	x1=0;
-	y1=0;
+	x1=x;
+	y1=hurairah;
 	movingdiagonall=1;
 	innercount=0;
 	do
 	{
-		if (x - movingdiagonall<8)
+		if (x - movingdiagonall>=0)
 			x1=x-movingdiagonall;
 		else 
 			break;
-		if (hurairah + movingdiagonall<8)
+		if ((hurairah+movingdiagonall)<8)
 			y1=hurairah+movingdiagonall;
 		else
 			break;
@@ -241,7 +242,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			break;
 		else if (box[x1][y1]==playertoken)
 		{
-			for (diagonalloop=0; diagonalloop < movingdiagonall; diagonalloop++)
+			for (diagonalloop=0; diagonalloop <movingdiagonall; diagonalloop++)
 			{
 				box[x-diagonalloop][hurairah+diagonalloop]=playertoken;
 				innercount++;
@@ -261,17 +262,17 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			
 	}while (movingdiagonall>1);
 /*up left*/
-	x1=0;
-	y1=0;
+	x1=x;
+	y1=hurairah;
 	movingdiagonall=1;
 	innercount=0;
 	do
 	{
-		if ((x- movingdiagonall)<8)
+		if (x-movingdiagonall>=0)
 			x1=x-movingdiagonall;
 		else 
 			break;
-		if ((hurairah- movingdiagonall)<8)
+		if (hurairah-movingdiagonall>=0)
 			y1=(hurairah-movingdiagonall);
 		else
 			break;
@@ -279,7 +280,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			break;
 		else if (box[x1][y1]==playertoken)
 		{
-			for (diagonalloop=0; diagonalloop < movingdiagonall; diagonalloop++)
+			for (diagonalloop=0; diagonalloop <movingdiagonall; diagonalloop++)
 			{
 				box[x-diagonalloop][hurairah-diagonalloop]=playertoken;
 				innercount++;
@@ -291,7 +292,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 				break;
 			}
 		
-			}
+		}
 		else 
 		{
 			movingdiagonall++;
@@ -361,12 +362,12 @@ struct player game()
 			bob=box[x][hurairah];
 			box[x][hurairah]= 'X';
 			printf("\nIts %s turn\n",playerinvisible.name);
-			printf("\n%s Tokens: %i\n",player1.name,player1.score);
-			printf("\n%s Tokens: %i\n",player2.name,player2.score);
+			printf("\n%s(@) Tokens: %i\n",player1.name,player1.score);
+			printf("\n%s(o) Tokens: %i\n",player2.name,player2.score);
 			display(box);
 			userinput=getch();
 			
-			if(userinput == 'x')
+			if(userinput == ' ')
 			{
 				if(bob!='@' && bob!='o')
 				{	
@@ -375,7 +376,10 @@ struct player game()
 					if (counter<1)
 					{
 						box[x][hurairah]=' ';
-						printf("/nInvalid move");
+						printf("\nInvalid move");
+						printf("\nPress any key to continue");
+						getch();
+						
 					}
 					else 							
 						confirm=true;
@@ -416,14 +420,42 @@ struct player game()
 				
 						hurairah++;
 				}
-					
+				else if(userinput == 'q')
+				{	
+					loop = false ;
+					confirm=true;
+					getch();
+				}
+				else if(userinput== 'y')
+				{	
+					if (invisibleplayer==2)
+					{
+						playerinvisible=player1;
+						invisibleplayer=1;
+					}
+					else 
+					{
+						playerinvisible=player2;
+						invisibleplayer=2;
+					}
+				}
 				box[allx][allhurairah]=bob;
 			}
 		}
-		
 	}
-
-	return player1;
+	if(player1.score > player2.score)
+	{	
+		return player1;
+	}
+	else if (player2.score > player1.score)
+	{
+		return player2;
+	}
+	else
+	{
+		player1.score=100;
+		return player1;
+	}	
 }
 
 
@@ -431,5 +463,12 @@ int main()
 {	
 	struct player winningplayer;
 	winningplayer=game();
+	if (winningplayer.score == 100)
+	{
+		printf("\nGame is Tied\n");
+	}
+	else
+		printf("\nWinner is %s with a score of %i.\n",winningplayer.name,winningplayer.score);
+	getch();
 }
 
