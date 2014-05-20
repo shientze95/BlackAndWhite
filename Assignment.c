@@ -23,7 +23,7 @@ void display(char box[8][8])
 	printf("\n 's' to go down");
 	printf("\n 'd' to go right");
 	printf("\n 'Space' to confirm");
-	printf("\n 'y' to skip turns");
+	printf("\n 'e' to skip turns");
 	printf("\n 'q' to quit");
 	}while (b<8);
 }
@@ -184,7 +184,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			movingdiagonall++;
 		}
 					
-	}while (1 == 1);
+	}while (movingdiagonall>1);
 /*Downleft*/
 	x1=x;
 	y1=hurairah;
@@ -222,7 +222,7 @@ int fliptokens(char box[8][8],char playertoken,int x,int hurairah)
 			movingdiagonall++;
 		}
 			
-	}while (1 == 1);
+	}while (movingdiagonall>1);
 /*up right*/
 	x1=x;
 	y1=hurairah;
@@ -426,7 +426,7 @@ struct player game()
 					confirm=true;
 					getch();
 				}
-				else if(userinput== 'y')
+				else if(userinput== 'e')
 				{	
 					if (invisibleplayer==2)
 					{
@@ -468,7 +468,17 @@ int main()
 		printf("\nGame is Tied\n");
 	}
 	else
-		printf("\nWinner is %s with a score of %i.\n",winningplayer.name,winningplayer.score);
-	getch();
+		{
+			printf("\nWinner is %s with a score of %i.Thank you for playing :D\n",winningplayer.name,winningplayer.score);
+			getch();
+		}
+		
+	FILE *file;
+	file = fopen("Assignment.txt","w"); 
+	fprintf(file,"Wining Player Name: %s\n", winningplayer.name);
+	fprintf(file,"\nWining Player Tokens: %i\n", winningplayer.score); 
+	fclose(file); 
+	getchar(); 
+	return 0;
 }
 
