@@ -2,6 +2,7 @@
 #include<stdbool.h>
 #include<stdlib.h>
 #include<conio.h>
+#include<sys/stat.h>
 
 void display(char box[8][8])
 {	
@@ -456,6 +457,18 @@ struct player game()
 	}	
 }
 
+void testfile()
+{
+	FILE *file;
+	int state;
+	struct _stat filestat;
+	state = _stat("Assignment.txt", &filestat);
+	if (state < 0)
+	{
+		file = fopen("Assignment.txt", "w");
+		printf("No log available.\n");
+	}
+}
 
 int main()
 {	
@@ -464,6 +477,7 @@ int main()
 	FILE *file;
 	printf("@o@o@o@o@o@o@o Welcome to The Game Black and White @o@o@o@o@o@o@o\n");
 	printf("Previous winner:\n");
+	testfile();
 	file = fopen("Assignment.txt","r");
 	while (fgets(prevHighscore, 120, file) != NULL)
 	{
@@ -483,10 +497,19 @@ int main()
 	printf("\nPress any key to exit.");
 	getch();	
 	
-	file = fopen("Assignment.txt","w");
-	fprintf(file,"Wining Player Name: %s", winningplayer.name);
-	fprintf(file,"\nWining Player Tokens: %i", winningplayer.score); 
-	fclose(file); 
+	if (winningplayer.score != 100)
+	{
+		file = fopen("Assignment.txt","w");
+		fprintf(file,"Wining Player Name: %s", winningplayer.name);
+		fprintf(file,"\nWining Player Tokens: %i", winningplayer.score); 
+		fclose(file);
+	}
+	else
+	{
+		file = fopen("Assignment.txt","w");
+		fprintf(file,"Previous game tied");
+		fclose(file);
+	}
 	getchar(); 
 	return 0;
 }

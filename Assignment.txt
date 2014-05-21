@@ -1,2 +1,0 @@
-Wining Player Name: Bob
-Wining Player Tokens: 5
