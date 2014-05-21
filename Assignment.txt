@@ -1,3 +1,2 @@
-Wining Player Name: wa
-
-Wining Player Tokens: 4
+Wining Player Name: Bob
+Wining Player Tokens: 5

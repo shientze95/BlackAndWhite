@@ -322,7 +322,6 @@ struct player game()
 	struct player player1;
 	struct player player2;
 	struct player playerinvisible;
-	printf("@o@o@o@o@o@o@o Welcome to The Game Black and White @o@o@o@o@o@o@o\n");
 	printf("\nPlease enter your details\n");
 	player1.token='@';
 	printf("What is player 1 name?");
@@ -424,7 +423,6 @@ struct player game()
 				{	
 					loop = false ;
 					confirm=true;
-					getch();
 				}
 				else if(userinput== 'e')
 				{	
@@ -462,21 +460,32 @@ struct player game()
 int main()
 {	
 	struct player winningplayer;
+	char prevHighscore[120];
+	FILE *file;
+	printf("@o@o@o@o@o@o@o Welcome to The Game Black and White @o@o@o@o@o@o@o\n");
+	printf("Previous winner:\n");
+	file = fopen("Assignment.txt","r");
+	while (fgets(prevHighscore, 120, file) != NULL)
+	{
+		printf("%s", prevHighscore);
+	}
+	fclose(file);
+	printf("\n");
 	winningplayer=game();
 	if (winningplayer.score == 100)
 	{
 		printf("\nGame is Tied\n");
 	}
 	else
-		{
-			printf("\nWinner is %s with a score of %i.Thank you for playing :D\n",winningplayer.name,winningplayer.score);
-			getch();
-		}
-		
-	FILE *file;
-	file = fopen("Assignment.txt","w"); 
-	fprintf(file,"Wining Player Name: %s\n", winningplayer.name);
-	fprintf(file,"\nWining Player Tokens: %i\n", winningplayer.score); 
+	{
+		printf("\nWinner is %s with a score of %i.Thank you for playing :D",winningplayer.name,winningplayer.score);
+	}
+	printf("\nPress any key to exit.");
+	getch();	
+	
+	file = fopen("Assignment.txt","w");
+	fprintf(file,"Wining Player Name: %s", winningplayer.name);
+	fprintf(file,"\nWining Player Tokens: %i", winningplayer.score); 
 	fclose(file); 
 	getchar(); 
 	return 0;
